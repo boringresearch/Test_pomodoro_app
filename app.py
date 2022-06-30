@@ -11,8 +11,8 @@ def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
+# Title + wider window
 import streamlit as st
-
 st.set_page_config(page_title="番茄钟", layout="wide")
 st.markdown(
     """
@@ -24,30 +24,23 @@ st.markdown(
         width: 400px;
         margin-left: -400px;
     }
-    
-     
     """,
     unsafe_allow_html=True,
 )
-#def remote_css(url):
-#    st.markdown(f'<link href="{url}" rel="stylesheet">', unsafe_allow_html=True)
-
-#def icon(icon_name):
-#    st.markdown(f'<i class="material-icons">{icon_name}</i>', unsafe_allow_html=True)
 
 local_css("style.css")
-#remote_css('https://fonts.googleapis.com/icon?family=Material+Icons')
-
-
-#---------------------------------#
 
 # Timer
-# Created by adapting from:
+# Created by changing:
 # https://www.geeksforgeeks.org/how-to-create-a-countdown-timer-using-python/
 # https://docs.streamlit.io/en/latest/api.html#lay-out-your-app
 
 event_name = st.sidebar.text_input("What do you want to do", '躺平')
 focus_time = st.sidebar.slider('Select focus time (mins)', 0, 60, 25)
+audio_type = st.sidebar.selectbox(
+     '背景音乐',
+     ('雨声', '风声', '读书声'))
+
 button_clicked = st.sidebar.button("Start")
 
 focus_sec = focus_time*60
@@ -57,12 +50,8 @@ import os
 os.system("curl --create-dirs -o $HOME/.postgresql/root.crt -O https://cockroachlabs.cloud/clusters/15f22c6a-7413-42be-b232-ca4adf391767/cert")
 os.environ["DATABASE_URL"] = "postgresql://pomodoro:M6LajZ2nQ_XFCaiYyvnlpg@free-tier7.aws-eu-west-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&options=--cluster%3Dkingly-druid-2749"
 
-import os
-# from sqlalchemy import create_engine, text
-
 # test sql
 import psycopg2
-
 
 if button_clicked:
     # st.header(event_name)
@@ -76,6 +65,10 @@ if button_clicked:
 
     with st.empty():
         my_bar = st.progress(0)
+        audio_file = open(audio_type+'.mp3', 'rb')
+        audio_bytes = audio_file.read()
+        st.audio(audio_bytes, format='audio/mp3')
+
         while focus_sec:
             mins, secs = divmod(focus_sec, 60)
             timer = '{:02d}:{:02d}'.format(mins, secs)
