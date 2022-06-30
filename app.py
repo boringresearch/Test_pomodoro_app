@@ -28,7 +28,7 @@ local_css("style.css")
 # https://www.geeksforgeeks.org/how-to-create-a-countdown-timer-using-python/
 # https://docs.streamlit.io/en/latest/api.html#lay-out-your-app
 
-event_name = st.sidebar.text_input("What do you want to do", '躺平'))
+event_name = st.sidebar.text_input("What do you want to do", '躺平')
 button_clicked = st.button("Start")
 
 focus_time = st.sidebar.slider('Select focus time', 0, 60, 25)
