@@ -13,3 +13,7 @@ body {
 .streamlit-expanderHeader {
     font-size: x-large;
 }
+
+.big-font {
+    font-size:300px !important;
+}
