@@ -47,13 +47,18 @@ os.system("curl --create-dirs -o $HOME/.postgresql/root.crt -O https://cockroach
 os.environ["DATABASE_URL"] = "postgresql://pomodoro:M6LajZ2nQ_XFCaiYyvnlpg@free-tier7.aws-eu-west-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&options=--cluster%3Dkingly-druid-2749"
 
 import os
-from sqlalchemy import create_engine, text
+# from sqlalchemy import create_engine, text
 
 # test sql
-engine = create_engine(os.environ["DATABASE_URL"])
-conn = engine.connect()
-res = conn.execute(text("SELECT now()")).fetchall()
-print(res)
+import psycopg2
+
+conn = psycopg2.connect(os.environ["DATABASE_URL"])
+
+with conn.cursor() as cur:
+    cur.execute("SELECT now()")
+    res = cur.fetchall()
+    conn.commit()
+    print(res)
 
 if button_clicked:
     with st.empty():
