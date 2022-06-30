@@ -39,7 +39,7 @@ Developed by: [Data Professor](http://youtube.com/dataprofessor)
 event_name = st.sidebar.text_input("What do you want to do")
 button_clicked = st.button("Start")
 
-focus_time = st.sidebar.slider('Select focus time', 0, 130, 25)
+focus_time = st.sidebar.slider('Select focus time', 0, 60, 25)
 focus_sec = focus_time*60
 break_time = 300
 
@@ -69,10 +69,10 @@ if button_clicked:
         while focus_sec:
             mins, secs = divmod(focus_sec, 60)
             timer = '{:02d}:{:02d}'.format(mins, secs)
-            st.header(f"⏳ {1-focus_sec/(focus_time*60)}")
+            st.header(f"⏳ {timer}")
             time.sleep(1)
             focus_sec -= 1
-            st.write(1-focus_sec/(focus_time*60))
+            my_bar.progress(1-focus_sec/(focus_time*60))
             st.success("🔔 25 minutes is over! Time for a break!")
 
 
