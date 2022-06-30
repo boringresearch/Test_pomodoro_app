@@ -36,11 +36,12 @@ Developed by: [Data Professor](http://youtube.com/dataprofessor)
 # https://www.geeksforgeeks.org/how-to-create-a-countdown-timer-using-python/
 # https://docs.streamlit.io/en/latest/api.html#lay-out-your-app
 
-mins = st.sidebar.text_input("How many")
+event_name = st.sidebar.text_input("What do you want to do")
 button_clicked = st.button("Start")
 
-t1 = 1500
-t2 = 300
+focus_time = st.sidebar.slider('Select focus time', 0, 130, 25)
+focus_sec = focus_time*60
+break_time = 300
 
 import os
 os.system("curl --create-dirs -o $HOME/.postgresql/root.crt -O https://cockroachlabs.cloud/clusters/15f22c6a-7413-42be-b232-ca4adf391767/cert")
@@ -51,8 +52,7 @@ import os
 
 # test sql
 import psycopg2
-
-
+my_bar = st.progress(0)
 
 if button_clicked:
     conn = psycopg2.connect(os.environ["DATABASE_URL"])
@@ -64,20 +64,23 @@ if button_clicked:
         st.text(res)
 
     with st.empty():
-        while t1:
-            mins, secs = divmod(t1, 60)
+        progress = 1/focus_sec
+        while focus_sec:
+            mins, secs = divmod(focus_sec, 60)
             timer = '{:02d}:{:02d}'.format(mins, secs)
             st.header(f"⏳ {timer}")
             time.sleep(1)
-            t1 -= 1
+            focus_sec -= 1
+            my_bar.progress(percent_complete + progress)
             st.success("🔔 25 minutes is over! Time for a break!")
 
+
     with st.empty():
-        while t2:
+        while break_time:
             # Start the break
-            mins2, secs2 = divmod(t2, 60)
+            mins2, secs2 = divmod(break_time, 60)
             timer2 = '{:02d}:{:02d}'.format(mins2, secs2)
             st.header(f"⏳ {timer2}")
             time.sleep(1)
-            t2 -= 1
+            break_time -= 1
             st.error("⏰ 5 minute break is over!")
