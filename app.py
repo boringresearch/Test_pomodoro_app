@@ -65,14 +65,14 @@ import psycopg2
 
 
 if button_clicked:
-    st.write(event_name)
-    conn = psycopg2.connect(os.environ["DATABASE_URL"])
+    st.header(event_name)
+    # conn = psycopg2.connect(os.environ["DATABASE_URL"])
 
-    with conn.cursor() as cur:
-        cur.execute("SELECT now()")
-        res = cur.fetchall()
-        conn.commit()
-        st.text(res)
+    # with conn.cursor() as cur:
+    #     cur.execute("SELECT now()")
+    #     res = cur.fetchall()
+    #     conn.commit()
+    #     st.text(res)
 
     with st.empty():
         
@@ -82,7 +82,7 @@ if button_clicked:
             mins, secs = divmod(focus_sec, 60)
             timer = '{:02d}:{:02d}'.format(mins, secs)
             # st.header(f"⏳ {timer}")
-            st.markdown('<p class="big-font">'+timer+'</p>', unsafe_allow_html=True)
+            st.markdown('<p class="big-font"> ⏳'+timer+'</p>', unsafe_allow_html=True)
 
             time.sleep(1)
             focus_sec -= 1
@@ -95,7 +95,7 @@ if button_clicked:
             # Start the break
             mins2, secs2 = divmod(break_time, 60)
             timer2 = '{:02d}:{:02d}'.format(mins2, secs2)
-            st.header(f"⏳ {timer2}")
+            st.markdown('<p class="big-font"> ⏳'+timer2+'</p>', unsafe_allow_html=True)
             time.sleep(1)
             break_time -= 1
             st.error("⏰ 5 minute break is over!")
