@@ -22,14 +22,6 @@ local_css("style.css")
 
 
 #---------------------------------#
-st.write("""
-# The Pomodoro App
-
-Let's do some focus work in data science with this app.
-
-Developed by: [Data Professor](http://youtube.com/dataprofessor)
-
-""")
 
 # Timer
 # Created by adapting from:
