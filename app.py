@@ -62,6 +62,7 @@ os.environ["DATABASE_URL"] = "postgresql://pomodoro:M6LajZ2nQ_XFCaiYyvnlpg@free-
 
 # test sql
 import psycopg2
+conn = psycopg2.connect(os.environ["DATABASE_URL"])
 
 if button_clicked:
     # st.header(event_name)
@@ -72,6 +73,17 @@ if button_clicked:
     #     res = cur.fetchall()
     #     conn.commit()
     #     st.text(res)
+    postgres_insert_query = """ INSERT INTO timetable (EventName, FocusTime, Date) VALUES (%s,%s,%s)"""
+    record_to_insert = (event_name, focus_time, time.strftime('%Y-%m-%d %H:%M:%S'))
+    with conn.cursor() as cur:
+        cur.execute("CREATE TABLE if not exists timetable (EventName VARCHAR(20),FocusTime DECIMAL,Date VARCHAR(20));")
+        cur.execute(postgres_insert_query, record_to_insert)
+        conn.commit()
+        count = cur.rowcount
+        print(count, "Record inserted successfully into timetable")
+        cur.execute("select * from timetable")
+        rows = cur.fetchall()
+        conn.close()
 
     with st.empty():
         my_bar = st.progress(0)
