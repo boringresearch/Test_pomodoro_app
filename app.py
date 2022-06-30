@@ -69,7 +69,7 @@ if button_clicked:
         while focus_sec:
             mins, secs = divmod(focus_sec, 60)
             timer = '{:02d}:{:02d}'.format(mins, secs)
-            st.header(f"⏳ {timer}")
+            st.header(f"⏳ {1-focus_sec/(focus_time*60)}")
             time.sleep(1)
             focus_sec -= 1
             st.write(1-focus_sec/(focus_time*60))
