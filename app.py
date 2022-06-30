@@ -52,15 +52,17 @@ import os
 # test sql
 import psycopg2
 
-conn = psycopg2.connect(os.environ["DATABASE_URL"])
 
-with conn.cursor() as cur:
-    cur.execute("SELECT now()")
-    res = cur.fetchall()
-    conn.commit()
-    print(res)
 
 if button_clicked:
+    conn = psycopg2.connect(os.environ["DATABASE_URL"])
+
+    with conn.cursor() as cur:
+        cur.execute("SELECT now()")
+        res = cur.fetchall()
+        conn.commit()
+        st.text(res)
+
     with st.empty():
         while t1:
             mins, secs = divmod(t1, 60)
