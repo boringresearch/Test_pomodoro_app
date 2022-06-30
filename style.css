@@ -9,3 +9,7 @@ body {
     height: 12em;
     width: 12em;
 }
+
+.streamlit-expanderHeader {
+    font-size: x-large;
+}

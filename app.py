@@ -24,6 +24,7 @@ st.markdown(
         width: 400px;
         margin-left: -400px;
     }
+    
      
     """,
     unsafe_allow_html=True,
