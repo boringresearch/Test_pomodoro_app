@@ -52,7 +52,7 @@ import os
 
 # test sql
 import psycopg2
-my_bar = st.progress(0)
+
 
 if button_clicked:
     conn = psycopg2.connect(os.environ["DATABASE_URL"])
@@ -65,6 +65,7 @@ if button_clicked:
 
     with st.empty():
         progress = 1/focus_sec
+        my_bar = st.progress(0)
         while focus_sec:
             mins, secs = divmod(focus_sec, 60)
             timer = '{:02d}:{:02d}'.format(mins, secs)
