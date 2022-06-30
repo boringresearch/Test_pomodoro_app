@@ -47,7 +47,7 @@ local_css("style.css")
 # https://docs.streamlit.io/en/latest/api.html#lay-out-your-app
 
 event_name = st.sidebar.text_input("What do you want to do", '躺平')
-button_clicked = st.button("Start")
+button_clicked = st.sidebar.button("Start")
 
 focus_time = st.sidebar.slider('Select focus time', 0, 60, 25)
 focus_sec = focus_time*60
@@ -82,7 +82,7 @@ if button_clicked:
             mins, secs = divmod(focus_sec, 60)
             timer = '{:02d}:{:02d}'.format(mins, secs)
             # st.header(f"⏳ {timer}")
-            st.markdown('<p class="big-font"> ⏳'+timer+'</p>', unsafe_allow_html=True)
+            st.markdown('<p class="big-font">'+timer+'</p>', unsafe_allow_html=True)
 
             time.sleep(1)
             focus_sec -= 1
@@ -95,7 +95,7 @@ if button_clicked:
             # Start the break
             mins2, secs2 = divmod(break_time, 60)
             timer2 = '{:02d}:{:02d}'.format(mins2, secs2)
-            st.markdown('<p class="big-font"> ⏳'+timer2+'</p>', unsafe_allow_html=True)
+            st.markdown('<p class="big-font">'+timer2+'</p>', unsafe_allow_html=True)
             time.sleep(1)
             break_time -= 1
             st.error("⏰ 5 minute break is over!")
