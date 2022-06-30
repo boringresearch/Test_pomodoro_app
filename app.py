@@ -65,7 +65,7 @@ import psycopg2
 
 
 if button_clicked:
-    st.header(event_name)
+    # st.header(event_name)
     # conn = psycopg2.connect(os.environ["DATABASE_URL"])
 
     # with conn.cursor() as cur:
