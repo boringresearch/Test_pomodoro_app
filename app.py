@@ -40,6 +40,9 @@ focus_time = st.sidebar.slider('Select focus time (mins)', 0, 60, 25)
 audio_type = st.sidebar.selectbox(
      '背景音乐',
      ('雨声', '风声', '读书声'))
+audio_file = open(audio_type+'.mp3', 'rb')
+audio_bytes = audio_file.read()
+st.audio(audio_bytes, format='audio/ogg')
 
 button_clicked = st.sidebar.button("Start")
 
@@ -65,9 +68,6 @@ if button_clicked:
 
     with st.empty():
         my_bar = st.progress(0)
-        audio_file = open(audio_type+'.mp3', 'rb')
-        audio_bytes = audio_file.read()
-        st.audio(audio_bytes, format='audio/mp3')
 
         while focus_sec:
             mins, secs = divmod(focus_sec, 60)
