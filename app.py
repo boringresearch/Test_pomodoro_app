@@ -94,8 +94,6 @@ if button_clicked:
             timer = '{:02d}:{:02d}'.format(mins, secs)
             # st.header(f"⏳ {timer}")
             st.markdown('<p class="big-font">'+timer+'</p>', unsafe_allow_html=True)
-            st.write(event_name)
-
             time.sleep(1)
             focus_sec -= 1
             my_bar.progress(1-focus_sec/(focus_time*60))
