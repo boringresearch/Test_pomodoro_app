@@ -40,9 +40,16 @@ focus_time = st.sidebar.slider('Select focus time (mins)', 0, 60, 25)
 audio_type = st.sidebar.selectbox(
      '背景音乐',
      ('雨声', '风声', '读书声'))
-audio_file = open(audio_type+'.mp3', 'rb')
-audio_bytes = audio_file.read()
-st.audio(audio_bytes, format='audio/ogg')
+# audio_file = open(audio_type+'.mp3', 'rb')
+# audio_bytes = audio_file.read()
+# st.audio(audio_bytes, format='audio/ogg')
+html_string = """
+            <audio controls autoplay>
+              <source src="https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3" type="audio/mp3">
+            </audio>
+            """
+sound = st.empty()
+sound.markdown(html_string, unsafe_allow_html=True)  # will display a st.audio with the sound you specified in the "src" of the html_string and autoplay it
 
 button_clicked = st.sidebar.button("Start")
 
