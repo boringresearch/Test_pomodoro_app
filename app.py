@@ -36,10 +36,26 @@ Developed by: [Data Professor](http://youtube.com/dataprofessor)
 # https://www.geeksforgeeks.org/how-to-create-a-countdown-timer-using-python/
 # https://docs.streamlit.io/en/latest/api.html#lay-out-your-app
 
+mins = st.sidebar.text_input("How many")
 button_clicked = st.button("Start")
 
 t1 = 1500
 t2 = 300
+
+import os
+os.system("curl --create-dirs -o $HOME/.postgresql/root.crt -O https://cockroachlabs.cloud/clusters/15f22c6a-7413-42be-b232-ca4adf391767/cert")
+os.environ["DATABASE_URL"] = "postgresql://pomodoro:M6LajZ2nQ_XFCaiYyvnlpg@free-tier7.aws-eu-west-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&options=--cluster%3Dkingly-druid-2749"
+
+import psycopg2
+
+conn = psycopg2.connect(os.environ["DATABASE_URL"])
+
+with conn.cursor() as cur: 
+	cur.execute("SELECT now()") 
+	res = cur.fetchall() 
+	conn.commit() 
+	print(res)
+    print(mins)
 
 if button_clicked:
     with st.empty():
