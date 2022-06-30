@@ -73,6 +73,7 @@ if button_clicked:
     #     res = cur.fetchall()
     #     conn.commit()
     #     st.text(res)
+    import time
     postgres_insert_query = """ INSERT INTO timetable (EventName, FocusTime, Date) VALUES (%s,%s,%s)"""
     record_to_insert = (event_name, focus_time, time.strftime('%Y-%m-%d %H:%M:%S'))
     with conn.cursor() as cur:
