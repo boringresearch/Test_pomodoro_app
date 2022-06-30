@@ -71,7 +71,7 @@ if button_clicked:
             st.header(f"⏳ {timer}")
             time.sleep(1)
             focus_sec -= 1
-            my_bar.progress(percent_complete + progress)
+            my_bar.progress(1- focus_sec/focus_time*60)
             st.success("🔔 25 minutes is over! Time for a break!")
 
 
