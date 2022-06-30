@@ -45,7 +45,7 @@ audio_type = st.sidebar.selectbox(
 # st.audio(audio_bytes, format='audio/ogg')
 html_string = """
             <audio controls autoplay>
-              <source src="https://github.com/boringresearch/Test_pomodoro_app/blob/main/%E9%9B%A8%E5%A3%B0.mp3?raw=true" type="audio/mp3">
+              <source src=""./雨声.mp3"" type="audio/mp3">
             </audio>
             """
 sound = st.empty()
