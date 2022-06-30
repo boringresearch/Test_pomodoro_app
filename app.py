@@ -47,6 +47,7 @@ import psycopg2
 
 
 if button_clicked:
+    st.write(event_name)
     conn = psycopg2.connect(os.environ["DATABASE_URL"])
 
     with conn.cursor() as cur:
@@ -56,7 +57,7 @@ if button_clicked:
         st.text(res)
 
     with st.empty():
-        st.header(event_name)
+        
 
         my_bar = st.progress(0)
         while focus_sec:
