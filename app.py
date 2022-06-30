@@ -45,7 +45,7 @@ audio_type = st.sidebar.selectbox(
 # st.audio(audio_bytes, format='audio/ogg')
 html_string = """
             <audio controls autoplay>
-              <source src=""http://www.edu-ing.cn/ds/%E9%9B%A8%E5%A3%B0.mp3"" type="audio/mp3">
+              <source src="http://www.edu-ing.cn/ds/%E9%9B%A8%E5%A3%B0.mp3" type="audio/mp3">
             </audio>
             """
 sound = st.empty()
