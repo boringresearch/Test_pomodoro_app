@@ -47,9 +47,9 @@ local_css("style.css")
 # https://docs.streamlit.io/en/latest/api.html#lay-out-your-app
 
 event_name = st.sidebar.text_input("What do you want to do", '躺平')
+focus_time = st.sidebar.slider('Select focus time (mins)', 0, 60, 25)
 button_clicked = st.sidebar.button("Start")
 
-focus_time = st.sidebar.slider('Select focus time', 0, 60, 25)
 focus_sec = focus_time*60
 break_time = 300
 
@@ -75,8 +75,6 @@ if button_clicked:
     #     st.text(res)
 
     with st.empty():
-        
-
         my_bar = st.progress(0)
         while focus_sec:
             mins, secs = divmod(focus_sec, 60)
