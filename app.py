@@ -46,16 +46,14 @@ import os
 os.system("curl --create-dirs -o $HOME/.postgresql/root.crt -O https://cockroachlabs.cloud/clusters/15f22c6a-7413-42be-b232-ca4adf391767/cert")
 os.environ["DATABASE_URL"] = "postgresql://pomodoro:M6LajZ2nQ_XFCaiYyvnlpg@free-tier7.aws-eu-west-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&options=--cluster%3Dkingly-druid-2749"
 
-import psycopg2
+import os
+from sqlalchemy import create_engine, text
 
-conn = psycopg2.connect(os.environ["DATABASE_URL"])
-
-with conn.cursor() as cur: 
-    cur.execute("SELECT now()") 
-    res = cur.fetchall() 
-    conn.commit() 
-    print(res)
-    print(mins)
+# test sql
+engine = create_engine(os.environ["DATABASE_URL"])
+conn = engine.connect()
+res = conn.execute(text("SELECT now()")).fetchall()
+print(res)
 
 if button_clicked:
     with st.empty():
