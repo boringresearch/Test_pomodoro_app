@@ -11,6 +11,23 @@ def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
+import streamlit as st
+
+st.set_page_config(page_title="番茄钟", layout="wide")
+st.markdown(
+    """
+    <style>
+    [data-testid="stSidebar"][aria-expanded="true"] > div:first-child{
+        width: 400px;
+    }
+    [data-testid="stSidebar"][aria-expanded="false"] > div:first-child{
+        width: 400px;
+        margin-left: -400px;
+    }
+     
+    """,
+    unsafe_allow_html=True,
+)
 #def remote_css(url):
 #    st.markdown(f'<link href="{url}" rel="stylesheet">', unsafe_allow_html=True)
 
